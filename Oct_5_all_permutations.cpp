@@ -24,15 +24,15 @@ int main()
 	std::vector<int>::iterator first = myints.begin(), last = myints.end();
 
 	std::generate (first, last, UniqueNumber);
-	int total=std::accumulate(first, last, 1, std::multiplies<int>());
 
 	std::for_each(first, last, myfunction);
 	std::cout << std::endl;
 
-	int i=1;
-	while (i++ < total) {
+	for(;;) {
 		std::vector<int>::iterator mt = last-2;
-		while(*mt > *(mt+1)) mt--;
+		while(*mt > *(mt+1) && mt-- != first);
+
+		if (mt < first) break;
 
 		std::vector<int>::iterator kt = last-1;
 		while(*mt > *kt) kt--;
