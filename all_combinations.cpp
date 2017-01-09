@@ -7,8 +7,11 @@ using namespace std;
 
 int main()
 {
-	unsigned int n=10;
-	unsigned int r=5;
+	unsigned int n, r;
+	cout << "The number of total objects: ";
+	cin >> n;
+	cout << "The number of objects taken: ";
+	cin >> r;
 
 	vector<unsigned int> myints(r);
 	vector<unsigned int>::iterator first = myints.begin(), last = myints.end();
@@ -16,9 +19,10 @@ int main()
 	generate(first, last, []{ static unsigned int k=0; return ++k; });
 	for_each(first, last, [](unsigned int &i){ cout << i << ' '; });
 	cout << endl;
-
+	
+	vector<unsigned int>::iterator mt;
 	while((*first) != n-r+1){
-		vector<unsigned int>::iterator mt = last;
+		mt = last;
 
 		while (*(--mt) == n-(last-mt)+1);
 		(*mt)++;

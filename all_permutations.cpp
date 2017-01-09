@@ -8,28 +8,32 @@ using namespace std;
 
 int main()
 {
-	int n=3;
+	unsigned int n;
+	cout << "The number of objects: ";
+	cin >> n;
 
-	vector<int> myints(n);
-	vector<int>::iterator first = myints.begin(), last = myints.end();
+	vector<unsigned int> myints(n);
+	vector<unsigned int>::iterator first = myints.begin(), last = myints.end();
 
 	generate(first, last, []{ static unsigned int k=0; return ++k; });
-	for_each(first, last, [](int &i){ cout << i << ' '; });
+	for_each(first, last, [](unsigned int &i){ cout << i << ' '; });
 	cout << endl;
 
+	vector<unsigned int>::iterator mt, kt;
 	for(;;) {
-		vector<int>::iterator mt = last-2;
+		mt = last-2;
 		while(*mt > *(mt+1) && mt-- != first);
 
 		if (mt < first) break;
 
-		vector<int>::iterator kt = last-1;
+		kt = last-1;
 		while(*mt > *kt) kt--;
 
 		iter_swap(mt, kt);
 		reverse(mt+1, last);
 
-		for_each(first, last, [](int &i){ cout << i << ' '; });
+		for_each(first, last, [](unsigned int &i){ cout << i << ' '; });
 		cout << endl;
 	}
 }
+
